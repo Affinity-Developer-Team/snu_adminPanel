@@ -23,7 +23,7 @@ include "connection.php";
 <?php
 if (isset($_SESSION['admin'])) {
     $indata = $_SESSION['admin'];
-    $serchdata = $_SESSION['search'];
+
 
 ?>
 
@@ -136,8 +136,10 @@ if (isset($_SESSION['admin'])) {
                         </div>
                         <div class="col-4 mt-4">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Serch ex: Nimal Perera" id="search">
-                                <button class="btn btn-secondary" onclick="serchbtn();"><i class="fab fa-searchengin"></i></button>
+                                <input type="text" class="form-control" placeholder="Serch ex: Nimal/ Perera / 077XXXXX" id="search">
+                                <button class="btn btn-danger"><i class="fas fa-arrow-rotate-right" onclick="refreshtab();"></i></button>
+                                <button class="btn btn-primary" onclick="serchbtn();"><i class="fab fa-searchengin"></i></button>
+
                             </div>
 
                         </div>
@@ -148,7 +150,7 @@ if (isset($_SESSION['admin'])) {
 
                     <div class="col-10  h-25 me-4  mt-5 tb1">
 
-                        <table class="table caption-top " id="tbonl">
+                        <table class="table table-primary " id="tbonl">
                             <thead>
                                 <tr>
                                     <th scope="col">#id</th>
@@ -163,15 +165,17 @@ if (isset($_SESSION['admin'])) {
                             </thead>
                             <tbody>
                                 <?php
-                               
+
 
                                 if (isset($_SESSION['search'])) {
+                                    $serchdata = $_SESSION['search'];
 
 
-                                    
-                                    $db5 = Database::serch("SELECT * FROM `onlstudents` WHERE `fname` = '" . $serchdata . "'");
+
+
+                                    $db5 = Database::serch("SELECT * FROM `onlstudents` WHERE `fname` = '" . $serchdata . "' OR `lname` = '" . $serchdata . "' OR `contact` = '" . $serchdata . "' OR `nic` = '" . $serchdata . "'");
                                     $num5 = $db5->num_rows;
-                               
+
 
                                     if ($num5 >= 1) {
                                         for ($j = 0; $j < $num5; $j++) {
@@ -200,14 +204,21 @@ if (isset($_SESSION['admin'])) {
                                         }
                                     } else {
                                         ?>
-                                        <script>
-                                            alert("Not Found");
-                                        </script>
+                                        <tr>
+                                            <th scope="row"></th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Not Founded Results</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
 
 
                                     <?php
                                     }
-                                }else {
+                                } else {
 
 
 

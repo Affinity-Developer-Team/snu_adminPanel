@@ -10,7 +10,6 @@ if(empty($serch)){
     echo "Please Enter Serch keyword";
 }else{
 
-
    
     $_SESSION['search'] = $serch;
     echo "success";
