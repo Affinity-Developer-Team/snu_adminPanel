@@ -131,3 +131,29 @@ function hidealert() {
     "d-none";
   error.innerHTML = "";
 }
+
+function serchbtn() {
+  var serchitem = document.getElementById("search");
+  var f = new FormData();
+  f.append("s",serchitem.value);
+
+  var req = new XMLHttpRequest();
+  req.onreadystatechange = function(){
+    if(req.readyState==4 && req.status==200){
+      var res = req.responseText;
+      if(res == "success"){
+        $("#tbonl").load(location.href + " #tbonl");
+      }
+      
+    }
+  }
+
+  req.open("POST","serchProcess.php",true);
+  req.send(f);
+
+ 
+
+
+
+
+}
