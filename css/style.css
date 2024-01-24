@@ -1,0 +1,25 @@
+.myul li{
+    transition: .4s;
+}
+.myul li:hover{
+    transform: translateX(10px);
+}
+
+.tabdiv{
+    height: 500px;
+    overflow: hidden;
+    overflow-y: scroll;
+
+
+    
+}
+.tb1{
+    height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.tb2{
+    height: 200px;
+    overflow: hidden;
+    overflow-y: scroll;
+}

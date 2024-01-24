@@ -1,0 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7)),url("bg2.png");
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+}
+.left{
+    background-color: #f8cc8a;
+    color: white;
+    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
+    border-radius: 5px 0 0 5px;
+}
+.content{
+    margin: 50px 0px 80px 30px;
+}
+.right{
+    background-color: white;
+    border-radius: 0 5px 5px 0;
+    
+}
+.content-2{
+    margin: 50px 0px 80px 60px;
+}
+.lab{
+    font-size: 15px;
+    font-weight: bold;
+    
+}
+.entry_f{
+    width: 350px;
+    height: 35px;
+    border-radius:5px;
+    outline: none;
+    border: 1px solid rgb(177, 177, 177);
+    margin-bottom: 15px;
+    background-color: transparent;
+    padding-left: 10px;
+
+}
+.entry_f:focus{
+    border: 1px solid #ff9900;
+}
+.log-btn{
+    width: 350px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    
+}
+
+
+.copytag{
+   
+    text-align: center;
+    text-decoration: none;
+    
+    color: rgb(165, 165, 165);
+}
+.copytag:hover{
+    color: rgb(165, 165, 165);
+}
+.wrap{
+    margin-top: 30px;
+}
+@media screen and (max-width:430px) {
+    .entry_f{
+        width: 220px;
+        
+    
+    }
+    .log-btn{
+        width: 220px;
+    }
+    .content-2{
+        margin-left: 30px;
+    }
+    
+}
+@media screen and (min-width:2560px) {
+    .wrap{
+        width:1000px;
+        height: 800px;
+    }
+    
+}
