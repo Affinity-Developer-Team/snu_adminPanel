@@ -127,7 +127,46 @@ function submit2() {
 }
 function hidealert() {
   var error = document.getElementById("erroshow");
-  error.className =
-    "d-none";
+  error.className = "d-none";
   error.innerHTML = "";
+}
+
+function serchbtn() {
+  var serchitem = document.getElementById("search");
+  var f = new FormData();
+  f.append("s", serchitem.value);
+
+  var req = new XMLHttpRequest();
+  req.onreadystatechange = function () {
+    if (req.readyState == 4 && req.status == 200) {
+      var res = req.responseText;
+      if (res == "success") {
+        $("#tbonl").load(location.href + " #tbonl");
+      } else {
+        alert(res);
+      }
+    }
+  };
+
+  req.open("POST", "serchProcess.php", true);
+  req.send(f);
+}
+function refreshtab() {
+  var serchitem2 = document.getElementById("search");
+  
+  var req = new XMLHttpRequest();
+  req.onreadystatechange = function () {
+    if (req.readyState == 4 && req.status == 200) {
+      var res = req.responseText;
+      if (res == "success") {
+        $("#tbonl").load(location.href + " #tbonl");
+        serchitem2.value = "";
+      } else {
+        alert(res);
+      }
+    }
+  };
+
+  req.open("POST", "tabfreshProcess.php", true);
+  req.send();
 }

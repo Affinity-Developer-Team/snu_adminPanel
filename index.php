@@ -24,6 +24,7 @@ include "connection.php";
 if (isset($_SESSION['admin'])) {
     $indata = $_SESSION['admin'];
 
+
 ?>
 
     <body style="overflow-x: hidden;">
@@ -126,9 +127,30 @@ if (isset($_SESSION['admin'])) {
                         <h4 class="text-secondary"><span class="text-secondary" style="font-size: 20px;"><i class="fas fa-bars"></i> </span> Database View</h4>
 
                     </div>
+                    <div class="row d-flex">
+                        <div class="col-6">
+                            <div>
+                                <h5 class="mt-4">Online Registerd Studentsa Table</h5>
+                            </div>
+
+                        </div>
+                        <div class="col-4 mt-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Serch ex: Nimal/ Perera / 077XXXXX" id="search">
+                                <button class="btn btn-danger"><i class="fas fa-arrow-rotate-right" onclick="refreshtab();"></i></button>
+                                <button class="btn btn-primary" onclick="serchbtn();"><i class="fab fa-searchengin"></i></button>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
 
                     <div class="col-10  h-25 me-4  mt-5 tb1">
-                        <table class="table caption-top">
+
+                        <table class="table table-primary " id="tbonl">
                             <thead>
                                 <tr>
                                     <th scope="col">#id</th>
@@ -143,22 +165,79 @@ if (isset($_SESSION['admin'])) {
                             </thead>
                             <tbody>
                                 <?php
-                                $db3 = Database::serch("SELECT * FROM `onlstudents` ");
-                                $num3 = $db3->num_rows;
 
-                                for ($r = 0; $r < $num3; $r++) {
-                                    $data3 = $db3->fetch_assoc();
+
+                                if (isset($_SESSION['search'])) {
+                                    $serchdata = $_SESSION['search'];
+
+
+
+
+                                    $db5 = Database::serch("SELECT * FROM `onlstudents` WHERE `fname` = '" . $serchdata . "' OR `lname` = '" . $serchdata . "' OR `contact` = '" . $serchdata . "' OR `nic` = '" . $serchdata . "'");
+                                    $num5 = $db5->num_rows;
+
+
+                                    if ($num5 >= 1) {
+                                        for ($j = 0; $j < $num5; $j++) {
+                                            $data5 = $db5->fetch_assoc();
                                 ?>
-                                    <tr>
-                                        <th scope="row"><?php echo $data3["id"] ?></th>
-                                        <td><?php echo $data3["fname"] ?></td>
-                                        <td><?php echo $data3["lname"] ?></td>
-                                        <td><?php echo $data3["address"] ?></td>
-                                        <td><?php echo $data3["contact"] ?></td>
-                                        <td><?php echo $data3["nic"] ?></td>
-                                        <td><?php echo $data3["dob"] ?></td>
-                                        <td><?php echo $data3["registerd_date"] ?></td>
-                                    </tr>
+                                            <tr>
+                                                <th scope="row"><?php echo $data5["id"] ?></th>
+                                                <td><?php echo $data5["fname"] ?></td>
+                                                <td><?php echo $data5["lname"] ?></td>
+                                                <td><?php echo $data5["address"] ?></td>
+                                                <td><?php echo $data5["contact"] ?></td>
+                                                <td><?php echo $data5["nic"] ?></td>
+                                                <td><?php echo $data5["dob"] ?></td>
+                                                <td><?php echo $data5["registerd_date"] ?></td>
+                                            </tr>
+
+
+
+
+                                        <?php
+
+
+
+
+
+                                        }
+                                    } else {
+                                        ?>
+                                        <tr>
+                                            <th scope="row"></th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Not Founded Results</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+
+
+                                    <?php
+                                    }
+                                } else {
+
+
+
+                                    $db3 = Database::serch("SELECT * FROM `onlstudents` ");
+                                    $num3 = $db3->num_rows;
+
+                                    for ($r = 0; $r < $num3; $r++) {
+                                        $data3 = $db3->fetch_assoc();
+                                    ?>
+                                        <tr>
+                                            <th scope="row"><?php echo $data3["id"] ?></th>
+                                            <td><?php echo $data3["fname"] ?></td>
+                                            <td><?php echo $data3["lname"] ?></td>
+                                            <td><?php echo $data3["address"] ?></td>
+                                            <td><?php echo $data3["contact"] ?></td>
+                                            <td><?php echo $data3["nic"] ?></td>
+                                            <td><?php echo $data3["dob"] ?></td>
+                                            <td><?php echo $data3["registerd_date"] ?></td>
+                                        </tr>
 
 
 
@@ -169,7 +248,13 @@ if (isset($_SESSION['admin'])) {
 
 
 
+                                    }
                                 }
+
+
+
+
+
 
 
 
@@ -183,8 +268,10 @@ if (isset($_SESSION['admin'])) {
 
 
                     </div>
-                    <div class="col-10  h-25 me-4  mt-5 tb2">
-                    <table class="table caption-top">
+                    <h5 class="mt-5">Students Details Sheet</h5>
+                    <div class="col-10  h-25 me-4  mt-4 tb2">
+
+                        <table class="table caption-top">
                             <thead>
                                 <tr>
                                     <th scope="col">#id</th>
@@ -194,7 +281,7 @@ if (isset($_SESSION['admin'])) {
                                     <th scope="col">Address</th>
                                     <th scope="col">Contact</th>
                                     <th scope="col">Nic</th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -213,7 +300,7 @@ if (isset($_SESSION['admin'])) {
                                         <td><?php echo $data4["address"] ?></td>
                                         <td><?php echo $data4["contact"] ?></td>
                                         <td><?php echo $data4["nic"] ?></td>
-                                        
+
                                     </tr>
 
 
