@@ -268,10 +268,28 @@ if (isset($_SESSION['admin'])) {
 
 
                     </div>
-                    <h5 class="mt-5">Students Details Sheet</h5>
+                    <div class="row d-flex">
+                        <div class="col-6">
+                            <div>
+                                <h5 class="mt-4">Students Details Sheet</h5>
+                            </div>
+
+                        </div>
+                        <div class="col-4 mt-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Serch ex: Nimal/ Perera / 077XXXXX" id="search2">
+                                <button class="btn btn-danger"><i class="fas fa-arrow-rotate-right" onclick="refreshtab2();"></i></button>
+                                <button class="btn btn-primary" onclick="serchbtn2();"><i class="fab fa-searchengin"></i></button>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
                     <div class="col-10  h-25 me-4  mt-4 tb2">
 
-                        <table class="table caption-top">
+                        <table class="table table-primary caption-top" id="tbst">
                             <thead>
                                 <tr>
                                     <th scope="col">#id</th>
@@ -286,22 +304,86 @@ if (isset($_SESSION['admin'])) {
                             </thead>
                             <tbody>
                                 <?php
-                                $db4 = Database::serch("SELECT * FROM `students`");
-                                $num4 = $db4->num_rows;
+                                if (isset($_SESSION["ser2"])) {
+                                    $ser2 = $_SESSION["ser2"];
 
-                                for ($r2 = 0; $r2 < $num4; $r2++) {
-                                    $data4 = $db4->fetch_assoc();
+                                    $db6 = Database::serch("SELECT * FROM `students` WHERE `stu_id` = '" . $ser2 . "' OR `f_name` = '" . $ser2 . "' OR `l_name` = '" . $ser2 . "' OR `contact` = '" . $ser2 . "' OR `nic` = '" . $ser2 . "'");
+                                    $db6num = $db6->num_rows;
+
+                                    if ($db6num != 0) {
+                                        $db6data = $db6->fetch_assoc();
+
+                                        for ($m = 0; $m < $db6num; $m++) {
                                 ?>
-                                    <tr>
-                                        <th scope="row"><?php echo $data4["id"] ?></th>
-                                        <td><?php echo $data4["stu_id"] ?></td>
-                                        <td><?php echo $data4["f_name"] ?></td>
-                                        <td><?php echo $data4["l_name"] ?></td>
-                                        <td><?php echo $data4["address"] ?></td>
-                                        <td><?php echo $data4["contact"] ?></td>
-                                        <td><?php echo $data4["nic"] ?></td>
+                                            <tr>
+                                                <th scope="row"><?php echo $db6data["id"] ?></th>
+                                                <td><?php echo $db6data["stu_id"] ?></td>
+                                                <td><?php echo $db6data["f_name"] ?></td>
+                                                <td><?php echo $db6data["l_name"] ?></td>
+                                                <td><?php echo $db6data["address"] ?></td>
+                                                <td><?php echo $db6data["contact"] ?></td>
+                                                <td><?php echo $db6data["nic"] ?></td>
 
-                                    </tr>
+                                            </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        <?php
+
+
+
+
+                                        }
+                                    } else {
+                                        ?>
+                                        <tr>
+                                            <th scope="row"></th>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Not Found</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
+
+
+
+
+
+
+
+                                    <?php
+                                    }
+                                } else {
+                                    $db4 = Database::serch("SELECT * FROM `students`");
+                                    $num4 = $db4->num_rows;
+
+                                    for ($r2 = 0; $r2 < $num4; $r2++) {
+                                        $data4 = $db4->fetch_assoc();
+                                    ?>
+                                        <tr>
+                                            <th scope="row"><?php echo $data4["id"] ?></th>
+                                            <td><?php echo $data4["stu_id"] ?></td>
+                                            <td><?php echo $data4["f_name"] ?></td>
+                                            <td><?php echo $data4["l_name"] ?></td>
+                                            <td><?php echo $data4["address"] ?></td>
+                                            <td><?php echo $data4["contact"] ?></td>
+                                            <td><?php echo $data4["nic"] ?></td>
+
+                                        </tr>
 
 
 
@@ -312,12 +394,30 @@ if (isset($_SESSION['admin'])) {
 
 
 
+                                    }
                                 }
 
 
 
 
                                 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -153,7 +153,7 @@ function serchbtn() {
 }
 function refreshtab() {
   var serchitem2 = document.getElementById("search");
-  
+
   var req = new XMLHttpRequest();
   req.onreadystatechange = function () {
     if (req.readyState == 4 && req.status == 200) {
@@ -168,5 +168,48 @@ function refreshtab() {
   };
 
   req.open("POST", "tabfreshProcess.php", true);
+  req.send();
+}
+
+function serchbtn2() {
+  var serch2 = document.getElementById("search2");
+
+  var form = new FormData();
+
+  form.append("ser", serch2.value);
+
+  var req = new XMLHttpRequest();
+
+  req.onreadystatechange = function () {
+    if (req.readyState == 4 && req.status == 200) {
+      var res = req.responseText;
+      if (res == "success") {  
+        $("#tbst").load(location.href + " #tbst");
+      } else {
+        alert(res);
+      }
+    }
+  };
+  req.open("POST", "serchbtn2Process.php", true);
+  req.send(form);
+}
+
+function refreshtab2() {
+  var serch2 = document.getElementById("search2");
+
+  var req = new XMLHttpRequest();
+  req.onreadystatechange = function () {
+    if (req.readyState == 4 && req.status == 200) {
+      var res = req.responseText;
+      if (res == "success") {
+        $("#tbst").load(location.href + " #tbst");
+        serch2.value = "";
+      } else {
+        alert(res);
+      }
+    }
+  };
+
+  req.open("GET", "refresh2Process.php", true);
   req.send();
 }
