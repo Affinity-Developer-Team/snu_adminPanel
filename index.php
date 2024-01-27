@@ -442,11 +442,7 @@ if (isset($_SESSION['admin'])) {
 
 
                                     </datalist>
-                                    <!-- <select name="name" id="funame" class="form-control">
-                                        <option value="none">-- Select Student --</option>
-                                        
-
-                                    </select> -->
+                                    
 
 
                                 </div>
