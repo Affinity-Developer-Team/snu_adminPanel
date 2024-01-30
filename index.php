@@ -30,22 +30,51 @@ if (isset($_SESSION['admin'])) {
     <body style="overflow-x: hidden;">
         <div class="row">
             <!-- left side -->
-            <div class="col-2" style="height: 650px; ">
-                <div class="ms-3" style=" height: 650px; border-right: .5px solid rgba(0,0,0,0.3);">
-                    <h5 class="p-2 mt-4">Company Logo/Title</h5>
+            <div class="col-2" style="height: 100vh; background-color: #282929;">
+                <div class="ms-3" style=" height: 87vh; border-right: .5px solid #ff9900;">
+
+                    <div class="col-9">
+                        <h5 class="p-2 mt-4" style="color: white;">Company Logo/Title</h5>
+
+                    </div>
+
+
                     <ul class="form-label myul">
-                        <li class="list-group-item mb-4 mt-5 "><a href="#" class="text-decoration-none text-secondary" onclick="dash();">Dashboard</a></li>
-                        <li class="list-group-item mb-4  "><a href="#" class="text-decoration-none text-secondary" onclick="gallery_show();">Gallery Update</a></li>
-                        <li class="list-group-item mb-4 "><a href="#" class="text-decoration-none text-secondary" onclick="student_show();">Students Attendens Update</a></li>
-                        <li class="list-group-item mb-4 "><a href="#" class="text-decoration-none text-secondary" onclick="database_show();">Database View</a></li>
-                        <li class="list-group-item mb-4 "><a href="#" class="text-decoration-none text-secondary" onclick="profile_show();">Online Registrations</a></li>
-                        <li class="list-group-item mb-4 mt-5  "><a href="#" class="text-decoration-none text-secondary sinout " onclick="logout();"><i class="fas fa-arrow-left"></i> Sign Out</a></li>
-
-
-
+                        <li class="list-group-item mb-4 mt-5 "><a href="#" class="text-decoration-none" onclick="dash();">Dashboard</a></li>
+                        <li class="list-group-item mb-4  "><a href="#" class="text-decoration-none " onclick="gallery_show();">Gallery Update</a></li>
+                        <li class="list-group-item mb-4 "><a href="#" class="text-decoration-none " onclick="student_show();">Students Attendens Update</a></li>
+                        <li class="list-group-item mb-4 "><a href="#" class="text-decoration-none " onclick="database_show();">Database View</a></li>
+                        <li class="list-group-item mb-4 "><a href="#" class="text-decoration-none " onclick="profile_show();">Online Registrations</a></li>
+                        <li class="list-group-item mb-4 mt-5  "><a href="#" class="text-decoration-none  sinout " onclick="logout();"><i class="fas fa-arrow-left"></i> Sign Out</a></li>
 
                     </ul>
 
+
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="col-3 d-flex justify-content-center align-items-lg-start">
+                            <div class="pro-img ms-3 mt-1 col-3">
+                                <img src="resourses/smp.png" alt="" width="auto" height="40px" style="border-radius: 30%;">
+                            </div>
+
+                        </div>
+                        <div class="col-9 d-flex flex-column  align-items-start">
+                            <h6 class="text-light mb-0"><?php echo $indata["fname"] ?> <?php echo $indata["lname"]; ?></h6>
+                            <small class="text-light mt-0 me-2"><?php echo $indata["email"] ?></small>
+
+                            <?php
+
+                            $brs = Database::serch("SELECT * FROM `branches` WHERE `branch_id` ='" . $indata["branches_branch_id"] . "'");
+                            $bdata = $brs->fetch_assoc();
+
+                            ?>
+
+
+                            <span class="badge rounded-pill bg-warning text-dark align-items-start mt-1"><?php echo $bdata["branch"]; ?></span>
+
+                        </div>
+                    </div>
 
                 </div>
 
@@ -53,15 +82,15 @@ if (isset($_SESSION['admin'])) {
             <!-- right side -->
             <div class="col-10 " style="height: 100vh;">
 
-                <div class="col-10 bg position-absolute d-block" style="height: 100vh; width: 99.3%;" id="prof">
+                <div class="col-10 bg position-absolute d-none" style="height: 100vh; width: 99.3%;" id="prof">
 
                     <div class="mt-4">
                         <h4 class="text-secondary"><span class="text-secondary" style="font-size: 20px;"><i class="fas fa-bars"></i> </span> Online Registerd Students</h4>
 
                     </div>
 
-                    <div class="col-10 mt-5">
-                        <table class="table caption-top">
+                    <div class="col-10 mt-5" style="box-shadow: 1px 2px 10px rgba(0,0,0,0.3);">
+                        <table class="table caption-top"  id="onls">
                             <thead>
                                 <tr>
                                     <th scope="col">#id</th>
@@ -72,11 +101,12 @@ if (isset($_SESSION['admin'])) {
                                     <th scope="col">Nic</th>
                                     <th scope="col">DOB</th>
                                     <th scope="col">R_Date</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody style="border:2px solid #ff9900;" >
                                 <?php
-                                $db3 = Database::serch("SELECT * FROM `onlstudents` ");
+                                $db3 = Database::serch("SELECT * FROM `onlstudents` WHERE `comfirm_c_id` = '2' ");
                                 $num3 = $db3->num_rows;
 
                                 for ($r = 0; $r < $num3; $r++) {
@@ -91,25 +121,16 @@ if (isset($_SESSION['admin'])) {
                                         <td><?php echo $data3["nic"] ?></td>
                                         <td><?php echo $data3["dob"] ?></td>
                                         <td><?php echo $data3["registerd_date"] ?></td>
+                                        <td><button type="button" class="btn btn-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" onclick="check(<?php echo $data3["id"] ?>);">
+                                                <i class="fas fa-check"></i>
+                                            </button></td>
                                     </tr>
-
-
-
 
                                 <?php
 
-
-
-
-
                                 }
 
-
-
-
                                 ?>
-
-
 
                             </tbody>
                         </table>
@@ -148,9 +169,9 @@ if (isset($_SESSION['admin'])) {
                     </div>
 
 
-                    <div class="col-10  h-25 me-4  mt-5 tb1">
+                    <div class="col-10  h-25 me-4  mt-5 tb1" style="box-shadow: 1px 2px 10px rgba(0,0,0,0.3);">
 
-                        <table class="table table-primary " id="tbonl">
+                        <table class="table " id="tbonl" >
                             <thead>
                                 <tr>
                                     <th scope="col">#id</th>
@@ -163,7 +184,7 @@ if (isset($_SESSION['admin'])) {
                                     <th scope="col">R_Date & Time</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody style="border:2px solid #ff9900;">
                                 <?php
 
 
@@ -173,7 +194,7 @@ if (isset($_SESSION['admin'])) {
 
 
 
-                                    $db5 = Database::serch("SELECT * FROM `onlstudents` WHERE `fname` = '" . $serchdata . "' OR `lname` = '" . $serchdata . "' OR `contact` = '" . $serchdata . "' OR `nic` = '" . $serchdata . "'");
+                                    $db5 = Database::serch("SELECT * FROM `onlstudents` WHERE `fname` = '" . $serchdata . "' OR `lname` = '" . $serchdata . "' OR `contact` = '" . $serchdata . "' OR `nic` = '" . $serchdata . "' AND `comfirm_c_id` = '1'");
                                     $num5 = $db5->num_rows;
 
 
@@ -221,8 +242,7 @@ if (isset($_SESSION['admin'])) {
                                 } else {
 
 
-
-                                    $db3 = Database::serch("SELECT * FROM `onlstudents` ");
+                                    $db3 = Database::serch("SELECT * FROM `onlstudents` WHERE `comfirm_c_id` = '1' ");
                                     $num3 = $db3->num_rows;
 
                                     for ($r = 0; $r < $num3; $r++) {
@@ -238,26 +258,10 @@ if (isset($_SESSION['admin'])) {
                                             <td><?php echo $data3["dob"] ?></td>
                                             <td><?php echo $data3["registerd_date"] ?></td>
                                         </tr>
-
-
-
-
                                 <?php
-
-
-
-
 
                                     }
                                 }
-
-
-
-
-
-
-
-
 
                                 ?>
 
@@ -287,9 +291,9 @@ if (isset($_SESSION['admin'])) {
 
 
                     </div>
-                    <div class="col-10  h-25 me-4  mt-4 tb2">
+                    <div class="col-10  h-25 me-4  mt-4 tb2" style="box-shadow: 1px 2px 10px rgba(0,0,0,0.3);">
 
-                        <table class="table table-primary caption-top" id="tbst">
+                        <table class="table  caption-top" id="tbst" style="border:2px solid #ff9900;">
                             <thead>
                                 <tr>
                                     <th scope="col">#id</th>
@@ -327,19 +331,6 @@ if (isset($_SESSION['admin'])) {
                                             </tr>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
                                         <?php
 
 
@@ -358,12 +349,6 @@ if (isset($_SESSION['admin'])) {
                                             <td></td>
 
                                         </tr>
-
-
-
-
-
-
 
                                     <?php
                                     }
@@ -385,13 +370,7 @@ if (isset($_SESSION['admin'])) {
 
                                         </tr>
 
-
-
-
                                 <?php
-
-
-
 
 
                                     }
@@ -403,51 +382,11 @@ if (isset($_SESSION['admin'])) {
                                 ?>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             </tbody>
                         </table>
 
 
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                 </div>
@@ -542,11 +481,7 @@ if (isset($_SESSION['admin'])) {
 
 
                                     </datalist>
-                                    <!-- <select name="name" id="funame" class="form-control">
-                                        <option value="none">-- Select Student --</option>
-                                        
-
-                                    </select> -->
+                                    
 
 
                                 </div>
@@ -577,8 +512,8 @@ if (isset($_SESSION['admin'])) {
                                 <div class="col-12 mt-3 d-flex justify-content-end">
                                     <button class="btn btn-primary" onclick="submit2();">Submit</button>
                                 </div>
-                                <div id="dtab" class="tabdiv">
-                                    <table class="table mt-5 table-responsive">
+                                <div id="dtab" class="tabdiv mt-4" style="box-shadow: 1px 2px 10px rgba(0,0,0,0.3); ">
+                                    <table class="table mt-2 table-responsive" style="border:2px solid #ff9900;">
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th scope="col">id</th>
@@ -618,30 +553,11 @@ if (isset($_SESSION['admin'])) {
                                                     <td><?php echo $da["submited_date"]; ?></td>
                                                 </tr>
 
-
-
-
-
-
-
-
                                             <?php
 
 
 
                                             }
-
-
-
-
-
-
-
-
-
-
-
-
 
                                             ?>
 
@@ -680,10 +596,56 @@ if (isset($_SESSION['admin'])) {
 
                     </div>
                 </div>
-                <div class="col-10 position-absolute d-none" style="height: 100vh; width: 99.3%;" id="dashb">
+                <!-- dash board -->
+
+
+
+
+
+                <div class="col-10 position-absolute d-block " style="height: 100vh; width: 99.3%;" id="dashb">
                     <div class="mt-4">
                         <h4 class="text-secondary"><span class="text-secondary" style="font-size: 20px;"><i class="fas fa-bars"></i> </span> Dashboard</h4>
 
+                        <div class="row mt-4">
+                            <div class="col-2">
+                                
+                                <div class="d-boxes w-100">
+                                    <h5>Totel Students</h5>
+                                    <h6><?php echo $num4?></h6>
+
+                                </div>
+
+
+                            </div>
+                            <div class="col-2">
+                                <div class="d-boxes w-100">
+
+                                </div>
+
+
+                            </div>
+                            <div class="col-2">
+                                <div class="d-boxes w-100">
+
+                                </div>
+
+
+                            </div>
+                            <div class="col-2">
+                                <div class="d-boxes w-100">
+
+                                </div>
+
+
+                            </div>
+                            <div class="col-2">
+                                <div class="d-boxes w-100">
+
+                                </div>
+
+
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -727,22 +689,9 @@ if (isset($_SESSION['admin'])) {
 
 
 
-
-
-
-
-
 }
 
 
-
-
-
 ?>
-
-
-
-
-
 
 </html>

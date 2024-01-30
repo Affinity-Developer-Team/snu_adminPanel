@@ -213,3 +213,25 @@ function refreshtab2() {
   req.open("GET", "refresh2Process.php", true);
   req.send();
 }
+
+function check(c){
+  var req = new XMLHttpRequest();
+  req.onreadystatechange = function(){
+    if(req.readyState === 4 && req.status==200){
+      var res= req.responseText;
+      if(res == "success"){
+        
+        $("#onls").load(location.href + " #onls");
+        $("#tbonl").load(location.href + " #tbonl");
+        
+      }else{
+        alert(res);
+
+      }
+      
+    }
+  }
+
+  req.open("GEt","confirmStudentProcess.php?id="+c,true);
+  req.send();
+}
