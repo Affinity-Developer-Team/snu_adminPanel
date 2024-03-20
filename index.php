@@ -40,11 +40,11 @@ if (isset($_SESSION['admin'])) {
 
 
                     <ul class="form-label myul">
-                        <li class="list-group-item mb-4 mt-5 "><a href="#" class="text-decoration-none" onclick="dash();">Dashboard</a></li>
-                        <li class="list-group-item mb-4  "><a href="#" class="text-decoration-none " onclick="gallery_show();">Gallery Update</a></li>
-                        <li class="list-group-item mb-4 "><a href="#" class="text-decoration-none " onclick="student_show();">Students Attendens Update</a></li>
-                        <li class="list-group-item mb-4 "><a href="#" class="text-decoration-none " onclick="database_show();">Database View</a></li>
-                        <li class="list-group-item mb-4 "><a href="#" class="text-decoration-none " onclick="profile_show();">Online Registrations</a></li>
+                        <li class="list-group-item mb-4 mt-5 "><a href="#" class="text-decoration-none" onclick="dash();"> Dashboard  <i class="fas fa-arrow-right"></i> </a></li>
+                        <li class="list-group-item mb-4  "><a href="#" class="text-decoration-none " onclick="gallery_show();">Gallery Update <i class="fas fa-arrow-right"></i></a></li>
+                        <li class="list-group-item mb-4 "><a href="#" class="text-decoration-none " onclick="student_show();">Students Attendens Update <i class="fas fa-arrow-right"></i></a></li>
+                        <li class="list-group-item mb-4 "><a href="#" class="text-decoration-none " onclick="database_show();">Database View <i class="fas fa-arrow-right"></i></a></li>
+                        <li class="list-group-item mb-4 "><a href="#" class="text-decoration-none " onclick="profile_show();">Online Registrations <i class="fas fa-arrow-right"></i></a></li>
                         <li class="list-group-item mb-4 mt-5  "><a href="#" class="text-decoration-none  sinout " onclick="logout();"><i class="fas fa-arrow-left"></i> Sign Out</a></li>
 
                     </ul>
