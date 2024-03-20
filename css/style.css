@@ -1,14 +1,17 @@
-.myul li{
-    transition: .4s;
+.myul li a{
+    transition: .3s;
+    color: gray;
 }
-.myul li:hover{
+.myul li a:hover{
     transform: translateX(10px);
+    color: #ff9900;
 }
 
 .tabdiv{
     height: 500px;
     overflow: hidden;
     overflow-y: scroll;
+    
 
 
     
@@ -22,4 +25,21 @@
     height: 200px;
     overflow: hidden;
     overflow-y: scroll;
+}
+
+.pro-img{
+    width: 40px;
+    height: 40px;
+    border-radius: 30%;
+    
+}
+.d-boxes{
+    height: 90px;
+    background-color: rgb(121, 120, 120);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
 }
