@@ -10,7 +10,7 @@ $pw = $_POST["p"];
 if(empty($email)){
     echo("Plese enter user name");
 }else if(empty($pw)){
-    echo("Plese emter your password");
+    echo("Plese enter your password");
 }else{
 
     $re = Database::serch("SELECT * FROM `admins` WHERE `email` ='".$email."' AND `password`='".$pw."'");
